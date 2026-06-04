@@ -33,7 +33,7 @@ $modx->addPackage('sitestatistics', MODX_CORE_PATH . 'components/sitestatistics/
 $collections = [];
 $materialsCount = 0;
 $hitsCount = 0;
-$stat;
+$stat ='';
 $resII = '';
 $uniqueUsersCount = 0;
 foreach ($data as $item) {
@@ -43,7 +43,7 @@ foreach ($data as $item) {
         $collection->fromArray([
             'pagetitle' => $item['category_title'],
             'alias' => $item['category_alias'],
-            'template' => 2, //id шаблона
+            'template' => 2 , //id шаблона
             'published' => 1,
             'isfolder' => 1, // Указываем, что это контейнер
             'class_key' => CollectionContainer::class, // Указываем, что это коллекция
@@ -85,9 +85,6 @@ foreach ($data as $item) {
        
          // Заполняем TV-поле для изображения аннотации (imageIntro)
     $modx->cacheManager->refresh();
-
-    if ($resource->save()) {
-      $materialsCount++;
 
       // Обработка изображения аннотации (TV-поле imageIntro)
       $images = json_decode($item['images'], true);
@@ -163,8 +160,7 @@ foreach ($data as $item) {
         $hitsCount += array_sum(array_column($pageStatisticsData, 'views'));
       }
         
-    }
-    echo "Материал '{$item['content_title']}' создан с ID {$resource->get('id')} '{$resII}' <br>";
+        echo "Материал '{$item['content_title']}' создан с ID {$resource->get('id')} '{$resII}' <br>";
     } else {
         echo "Ошибка при создании материала '{$item['content_title']}' <br>";
     }
